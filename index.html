@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    /* .timer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+    }
+    .timer-box {
+      margin: 0 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    } */
+    /*
+=============== 
+Fonts
+===============
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
+
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  /* dark shades of primary color*/
+  --clr-primary-1: rgb(209, 79, 56);
+  --clr-primary-2: brown;
+  --clr-primary-3: rgb(223, 52, 52);
+  --clr-primary-4: grey;
+  /* primary/main color */
+  --clr-primary-5: #49a6e9;
+  /* lighter shades of primary color */
+  --clr-primary-6: red;
+  --clr-primary-7:green ; 
+  --clr-primary-8: blue;
+  --clr-primary-9: #c5e5fc;
+  --clr-primary-10: #ebf7ff;
+  /* darkest grey - used for headings */
+  --clr-grey-1: #102a42;
+  --clr-grey-2: #243a52;
+  --clr-grey-3: #831414;
+  --clr-grey-4: #48647f;
+  /* grey used for paragraphs */
+  --clr-grey-5: #231414;
+  --clr-grey-6: #829ab0;
+  --clr-grey-7: #9eb2c7;
+  --clr-grey-8: #bcccdc;
+  --clr-grey-9: #dae2ec;
+  --clr-grey-10: #f1f5f8;
+  --clr-white: #fff;
+  --clr-red-dark: #bb2525;
+  --clr-red-light: #e66b6b;
+  --clr-green-dark: #25bb32;
+  --clr-green-light: #6be675;
+  --clr-black: #222;
+  --clr-gold: #c59d5f;
+  --ff-primary: "Roboto", sans-serif;
+  --ff-secondary: "Open Sans", sans-serif;
+  --transition: all 0.3s linear;
+  --spacing: 0.25rem;
+  --radius: 0.5rem;
+  --light-shadow: 0 5px 15px #0000001a;
+  --dark-shadow: 0 5px 15px #00000033;
+  --max-width: 1170px;
+  --fixed-width: 620px;
+}
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--ff-secondary);
+  background: var(--clr-grey-8);
+  color: var(--clr-grey-1);
+  line-height: 1.5;
+  font-size: 0.875rem;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img:not(.logo) {
+  width: 100%;
+}
+
+img {
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  font-family: var(--ff-primary);
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 0.875rem;
+}
+
+
+@media screen and (min-width: 800px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+  body {
+    font-size: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1;
+  }
+
+  .gift-info p {
+    color: var(--clr-grey-4);
+    /* text-align: justify; */
+  }
+  
+}
+/*  global classes */
+
+.btn {
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--clr-black);
+  padding: 0.375rem 0.75rem;
+  letter-spacing: var(--spacing);
+  display: inline-block;
+  transition: var(--transition);
+  font-size: 0.875rem;
+  border: 2px solid var(--clr-black);
+  cursor: pointer;
+  box-shadow: 0 1px 3px #00000033;
+  border-radius: var(--radius);
+}
+.btn:hover {
+  color: var(--clr-white);
+  background: var(--clr-black);
+}
+/* section */
+.section {
+  padding: 5rem 0;
+}
+
+.section-center {
+  width: 90vw;
+  margin: 5rem auto;
+  max-width: 1170px;
+}
+
+main {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+/*
+=============== 
+Countdown Timer
+===============
+*/
+.gift-img {
+  margin-bottom: 2rem;
+}
+
+.gift-img img {
+  border-radius: 7px;
+}
+
+.gift-info h3 {
+  text-transform: uppercase;
+  color: var(--clr-primary-3);
+}
+
+.gift-info p {
+  color: var(--clr-grey-4);
+  /* text-align: justify; */
+}
+
+.date {
+  color: var(--clr-grey-5);
+  font-size: 0.85rem;
+}
+
+@media screen and (min-width: 992px) {
+  .section-center {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    gap: 3rem;
+    width: 95vw;
+  }
+
+  .gift-img {
+    margin-bottom: 0;
+  }
+}
+
+.gift-info p {
+  margin: 2rem 0;
+}
+
+.deadline {
+  display: flex;
+}
+
+.deadline-format {
+  background: var(--clr-primary-2);
+  color: var(--clr-white);
+  margin-right: 1rem;
+  width: 5rem;
+  height: 5rem;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.deadline-format span {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+}
+
+.deadline h4:not(.expired) {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  letter-spacing: var(--spacing);
+}
+
+  </style>
+</head>
+<body style="background-color: #6be675;">
+
+  <!-- <div class="timer">
+    <div class="timer-box" id="days">0</div>
+    <div class="timer-box" id="hours">0</div>
+    <div class="timer-box" id="minutes">0</div>
+    <div class="timer-box" id="seconds">0</div>
+  </div> -->
+  <section class="section-center">
+      <!-- image -->
+      <article class="gift-img">
+        <img src="./phone pro.jfif" alt="iphone" />
+      </article>
+      <!-- info -->
+      <article class="gift-info">
+        <h3>old iphone giveaway</h3>
+        <h4 class="giveaway">
+          giveaway ends on Sunday, 24 April 2023, 11:00am
+        </h4>
+        <p>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+          Reprehenderit molestiae cum libero atque ut voluptate qui consectetur
+          aliquid incidunt voluptatem quos, dolore, non commodi quaerat aliquam
+          eligendi, quisquam totam blanditiis.
+        </p>
+        <div class="deadline expired-message">
+          <!-- days -->
+          <div class="deadline-format">
+            <div>
+              <h4 class="days" id="days">34</h4>
+              <span>days</span>
+            </div>
+          </div>
+          <!-- end of days -->
+          <!-- days -->
+          <div class="deadline-format">
+            <div>
+              <h4 class="hours" id="hours">34</h4>
+              <span>hours</span>
+            </div>
+          </div>
+          <!-- end of days -->
+          <!-- minutes -->
+          <div class="deadline-format">
+            <div>
+              <h4 class="minutes" id="minutes">34</h4>
+              <span>mins</span>
+            </div>
+          </div>
+          <!-- end of days -->
+          <!-- minutes -->
+          <div class="deadline-format">
+            <div>
+              <h4 class="seconds" id="seconds">34</h4>
+              <span>secs</span>
+            </div>
+          </div>
+          <!-- end of days -->
+        </div>
+      </article>
+    </section>
+
+  <script>
+    // Set the countdown date
+    const countdownDate = new Date();
+    countdownDate.setDate(countdownDate.getDate() + 10); // Add 10 days
+
+    // Update the countdown every second
+    const countdownTimer = setInterval(updateCountdown, 1000);
+
+    function updateCountdown() {
+      const currentTime = new Date().getTime();
+      const distance = countdownDate - currentTime;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the countdown in the HTML
+      document.getElementById("days").innerText = formatTime(days);
+      document.getElementById("hours").innerText = formatTime(hours);
+      document.getElementById("minutes").innerText = formatTime(minutes);
+      document.getElementById("seconds").innerText = formatTime(seconds);
+
+      // If the countdown is finished, display 'Expired'
+      if (distance < 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("days").innerText = '0';
+        document.getElementById("hours").innerText = '0';
+        document.getElementById("minutes").innerText = '0';
+        document.getElementById("seconds").innerText = '0';
+        // You can set a message or perform an action when the countdown finishes
+        alert("Countdown expired!");
+      }
+    }
+
+    function formatTime(time) {
+      return time < 10 ? `0${time}` : time;
+    }
+
+    // Call the function once initially to prevent delay
+    updateCountdown();
+  </script>
+</body>
+</html>
